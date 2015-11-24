@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="WpApiClient.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WpApiClient"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="TasksListboxTemplate" >
+            <StackPanel>
+                <TextBlock Text="{Binding Id}"></TextBlock>
+                <TextBlock Text="{Binding Title}"></TextBlock>
+                <TextBlock Text="{Binding Value}"></TextBlock>
+                <TextBlock Text="{Binding OwnerId}"></TextBlock>
+                <TextBlock Text="{Binding CreatedAt}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" FontSize="30">Add Task</TextBlock>
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="NewTitle"></TextBox>
+            <TextBox x:Name="NewValue"></TextBox>
+            <TextBox x:Name="NewOwnerId"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Click="OnAddTaskClick">Add new task</Button>
+            <Button Click="OnRefreshClick">Refresh List</Button>
+        </StackPanel>
+        <TextBlock Grid.Row="3" FontSize="30">Tasks List</TextBlock>
+        <ListBox Grid.Row="4" x:Name="TasksListbox" ItemTemplate="{StaticResource TasksListboxTemplate}"></ListBox>
+    </Grid>
+</Page>
