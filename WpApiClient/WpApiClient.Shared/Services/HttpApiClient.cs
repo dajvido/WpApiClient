@@ -41,5 +41,11 @@ namespace WpApiClient.Services
             var response = await request.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<List<Models.Task>>(response); ;
         }
+
+        public void RemoveTask(int taskId)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, _httpUri + "/" + taskId);
+            _client.SendAsync(request);
+        }
     }
 }

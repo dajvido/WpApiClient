@@ -65,6 +65,11 @@ namespace WpApiClient
             ClearTasksCollection();
             FillTasksCollection();
         }
+        private void RemoveTask(int taskId, int taskIndex)
+        {
+            _client.RemoveTask(taskId);
+            _tasksCollection.RemoveAt(taskIndex);
+        }
         private void OnAddTaskClick(object sender, RoutedEventArgs e)
         {
             AddTask();
@@ -74,6 +79,16 @@ namespace WpApiClient
         private void OnRefreshClick(object sender, RoutedEventArgs e)
         {
             RefreshTasksList();
+        }
+
+        private void OnTaskClick(object sender, SelectionChangedEventArgs e)
+        {
+            Task task = TasksListView.SelectedItem as Task;
+            if (task != null)
+            {
+                RemoveTask(task.Id, TasksListView.SelectedIndex);
+                RefreshTasksList();
+            }
         }
     }
 }

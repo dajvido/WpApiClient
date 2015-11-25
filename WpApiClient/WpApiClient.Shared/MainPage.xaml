@@ -40,6 +40,7 @@
             <Button Click="OnRefreshClick">Refresh List</Button>
         </StackPanel>
         <TextBlock Grid.Row="3" FontSize="30">Tasks List</TextBlock>
-        <ListView Grid.Row="4" x:Name="TasksListView" Background="Gray" ItemTemplate="{StaticResource TasksListViewTemplate}"></ListView>
+        <ListView Grid.Row="4" x:Name="TasksListView" SelectionChanged="OnTaskClick"
+                  Background="Gray" ItemTemplate="{StaticResource TasksListViewTemplate}"></ListView>
     </Grid>
 </Page>
