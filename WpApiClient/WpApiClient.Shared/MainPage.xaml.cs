@@ -21,7 +21,7 @@ namespace WpApiClient
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            TasksListbox.ItemsSource = _tasksCollection;
+            TasksListView.ItemsSource = _tasksCollection;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}

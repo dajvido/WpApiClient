@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <DataTemplate x:Key="TasksListboxTemplate" >
+        <DataTemplate x:Key="TasksListViewTemplate" >
             <StackPanel>
                 <TextBlock Text="{Binding Id}"></TextBlock>
                 <TextBlock Text="{Binding Title}"></TextBlock>
@@ -40,6 +40,6 @@
             <Button Click="OnRefreshClick">Refresh List</Button>
         </StackPanel>
         <TextBlock Grid.Row="3" FontSize="30">Tasks List</TextBlock>
-        <ListBox Grid.Row="4" x:Name="TasksListbox" ItemTemplate="{StaticResource TasksListboxTemplate}"></ListBox>
+        <ListView Grid.Row="4" x:Name="TasksListView" Background="Gray" ItemTemplate="{StaticResource TasksListViewTemplate}"></ListView>
     </Grid>
 </Page>
