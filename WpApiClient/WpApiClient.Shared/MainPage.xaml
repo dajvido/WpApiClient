@@ -41,6 +41,7 @@
         </StackPanel>
         <TextBlock Grid.Row="3" FontSize="30">Tasks List</TextBlock>
         <ListView Grid.Row="4" x:Name="TasksListView" SelectionChanged="OnTaskClick"
-                  Background="Gray" ItemTemplate="{StaticResource TasksListViewTemplate}"></ListView>
+                  Background="Gray" ItemsSource="{Binding TasksList}"
+                  ItemTemplate="{StaticResource TasksListViewTemplate}"></ListView>
     </Grid>
 </Page>

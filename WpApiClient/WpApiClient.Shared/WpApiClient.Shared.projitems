@@ -20,6 +20,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Task.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HttpApiClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">

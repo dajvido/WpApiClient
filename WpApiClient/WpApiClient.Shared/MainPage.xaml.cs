@@ -16,79 +16,74 @@ namespace WpApiClient
             new Uri("http://windowsphoneuam.azurewebsites.net/api/todotasks")
         );
 
-        readonly ObservableCollection<Task> _tasksCollection = new ObservableCollection<Task>();
+        public ObservableCollection<Task> TasksList = new ObservableCollection<Task>();
+
         public MainPage()
         {
             this.InitializeComponent();
+            this.DataContext = this;
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            TasksListView.ItemsSource = _tasksCollection;
+            TasksListView.ItemsSource = TasksList;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}
 
-        private string ComposeTask()
+        private void ClearFields()
         {
-            return JsonConvert.SerializeObject(new Task
+            NewTitle.Text = "";
+            NewValue.Text = "";
+            NewOwnerId.Text = "";
+        }
+
+        private Task ComposeTask()
+        {
+            return new Task
             {
                 Title = NewTitle.Text,
                 Value = NewValue.Text,
                 OwnerId = NewOwnerId.Text
-            });
+            };
         }
+
         private void AddTask()
         {
-            _client.SendTask(ComposeTask());
+            var task = ComposeTask();
+            ClearFields();
+            _client.SendTask(JsonConvert.SerializeObject(task));
+            TasksList.Add(task);
         }
 
-        private void ClearTasksCollection()
+        private async void PullTasks()
         {
-            _tasksCollection.Clear();
-        }
-
-        private async void FillTasksCollection()
-        {
-            foreach (var t in from task in await _client.GetTasks()
-                              select new Task
-                              {
-                                  Id = task.Id,
-                                  Title = task.Title,
-                                  Value = task.Value,
-                                  OwnerId = task.OwnerId,
-                                  CreatedAt = task.CreatedAt
-                              })
+            TasksList.Clear();
+            foreach (var task in await _client.GetTasks())
             {
-                _tasksCollection.Add(t);
+                TasksList.Add(task);
             }
+
         }
-        private void RefreshTasksList()
+
+        private void RemoveTask(Task task)
         {
-            ClearTasksCollection();
-            FillTasksCollection();
+            _client.RemoveTask(task.Id);
+            TasksList.Remove(task);
         }
-        private void RemoveTask(int taskId, int taskIndex)
-        {
-            _client.RemoveTask(taskId);
-            _tasksCollection.RemoveAt(taskIndex);
-        }
+
         private void OnAddTaskClick(object sender, RoutedEventArgs e)
         {
             AddTask();
-            RefreshTasksList();
         }
 
         private void OnRefreshClick(object sender, RoutedEventArgs e)
         {
-            RefreshTasksList();
+            PullTasks();
         }
 
         private void OnTaskClick(object sender, SelectionChangedEventArgs e)
         {
-            Task task = TasksListView.SelectedItem as Task;
-            if (task != null)
-            {
-                RemoveTask(task.Id, TasksListView.SelectedIndex);
-                RefreshTasksList();
-            }
+            var task = TasksListView.SelectedItem as Task;
+            if (task == null) return;
+            RemoveTask(task);
         }
     }
 }

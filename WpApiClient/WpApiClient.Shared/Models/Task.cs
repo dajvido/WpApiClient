@@ -1,6 +1,6 @@
 ﻿namespace WpApiClient.Models
 {
-    public class Task
+    public class Task : ViewModels.ViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
