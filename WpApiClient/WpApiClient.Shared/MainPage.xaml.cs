@@ -7,26 +7,30 @@ using Windows.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 using WpApiClient.Models;
 using WpApiClient.Services;
+using WpApiClient.ViewModels;
+using WpApiClient.Extensions;
 
 namespace WpApiClient
 {
     public sealed partial class MainPage : Page
     {
-        readonly HttpApiClient _client = new HttpApiClient(
-            new Uri("http://windowsphoneuam.azurewebsites.net/api/todotasks")
-        );
-
-        public ObservableCollection<Task> TasksList = new ObservableCollection<Task>();
-
         public MainPage()
         {
             this.InitializeComponent();
-            this.DataContext = this;
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            TasksListView.ItemsSource = TasksList;
+
+            DataContext = App.ViewModelLocator.MainViewModel;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}
+
+        private MainViewModel ViewModel
+        {
+            get
+            {
+                return DataContext as MainViewModel;
+            }
+        }
 
         private void ClearFields()
         {
@@ -48,25 +52,8 @@ namespace WpApiClient
         private void AddTask()
         {
             var task = ComposeTask();
+            ViewModel.Add(task);
             ClearFields();
-            _client.SendTask(JsonConvert.SerializeObject(task));
-            TasksList.Add(task);
-        }
-
-        private async void PullTasks()
-        {
-            TasksList.Clear();
-            foreach (var task in await _client.GetTasks())
-            {
-                TasksList.Add(task);
-            }
-
-        }
-
-        private void RemoveTask(Task task)
-        {
-            _client.RemoveTask(task.Id);
-            TasksList.Remove(task);
         }
 
         private void OnAddTaskClick(object sender, RoutedEventArgs e)
@@ -76,14 +63,14 @@ namespace WpApiClient
 
         private void OnRefreshClick(object sender, RoutedEventArgs e)
         {
-            PullTasks();
+            ViewModel.GetTasks();
         }
 
         private void OnTaskClick(object sender, SelectionChangedEventArgs e)
         {
             var task = TasksListView.SelectedItem as Task;
             if (task == null) return;
-            RemoveTask(task);
+            ViewModel.RemoveTask(task);
         }
     }
 }
