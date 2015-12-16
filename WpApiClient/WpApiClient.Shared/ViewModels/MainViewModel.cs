@@ -14,7 +14,7 @@ namespace WpApiClient.ViewModels
     {
         public MainViewModel ()
         {
-            var TasksList = new ObservableCollection<Task>();
+            TasksList = new ObservableCollection<Task>();
         }
 
         readonly HttpApiClient _client = new HttpApiClient(
@@ -36,7 +36,6 @@ namespace WpApiClient.ViewModels
         {
             var result = _client.SendTask(JsonConvert.SerializeObject(task));
             if (result) { 
-                // TODO: HANDLE EXCEPTION
                 TasksList.Add(task);
             } else
             {
