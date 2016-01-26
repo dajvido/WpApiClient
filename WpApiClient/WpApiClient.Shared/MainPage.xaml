@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock FontSize="30" Width="278">
+            <TextBlock FontSize="30" Width="278" VerticalAlignment="Center">
         		<Run Text="Add Task"/>
             </TextBlock>
             <Button Click="OnAboutClick" Content="About" Margin="0,0,0,2.167"/>
@@ -42,8 +42,8 @@
             <TextBox x:Name="NewValue"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Click="OnAddTaskClick">Add new task</Button>
-            <Button Click="OnRefreshClick">Refresh List</Button>
+            <Button Click="OnAddTaskClick" Width="200">Add new task</Button>
+            <Button Click="OnRefreshClick" Width="200">Refresh List</Button>
         </StackPanel>
         <TextBlock Grid.Row="3" FontSize="30">Tasks List</TextBlock>
         <ListView Grid.Row="4" x:Name="TasksListView" SelectionChanged="OnTaskClick"

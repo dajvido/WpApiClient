@@ -22,9 +22,9 @@
             <TextBox x:Name="Value"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Click="OnUpdateTaskClick" Content="Update"/>
-            <Button Click="OnDeleteClick" Content="Delete"/>
-            <Button Click="OnCancelClick" Content="Cancel"/>
+            <Button Click="OnUpdateTaskClick" Content="Update" Width="133"/>
+            <Button Click="OnDeleteClick" Content="Delete" Width="133"/>
+            <Button Click="OnCancelClick" Content="Cancel" Width="133"/>
         </StackPanel>
     </Grid>
 </Page>
