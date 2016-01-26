@@ -32,7 +32,6 @@ namespace WpApiClient
             if (task == null) return;
             Title.Text = task.Title;
             Value.Text = task.Value;
-            OwnerId.Text = task.OwnerId;
         }
 
         public TaskDetailsPage()
@@ -46,7 +45,10 @@ namespace WpApiClient
 
         private void OnUpdateTaskClick(object sender, RoutedEventArgs e)
         {
-
+            task.Title = Title.Text;
+            task.Value = Value.Text;
+            ViewModel.UpdateTask(task);
+            Frame.Navigate(typeof(MainPage));
         }
 
         private void OnDeleteClick(object sender, RoutedEventArgs e)

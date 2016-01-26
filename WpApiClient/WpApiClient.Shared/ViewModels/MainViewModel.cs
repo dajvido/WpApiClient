@@ -53,7 +53,20 @@ namespace WpApiClient.ViewModels
                 await new MessageDialog("There was a problem getting tasks. Please try later.", "Sync error").ShowAsync();
             }
         }
-   
+
+        public async void UpdateTask(Task task)
+        {
+            var result = _client.UpdateTask(task.Id, JsonConvert.SerializeObject(task));
+            if (result)
+            {
+                GetTasks();
+            }
+            else
+            {
+                await new MessageDialog("There was a problem removing task. Please try later.", "Sync error").ShowAsync();
+            }
+        }
+
         public async void RemoveTask(Task task)
         {
             var result = _client.RemoveTask(task.Id);

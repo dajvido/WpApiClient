@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -23,13 +27,24 @@ namespace WpApiClient
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}
 
+        private static string GetDeviceId()
+        {
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hasher = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
+
+            var hardwareId = token.Id;
+            var hashed = hasher.HashData(hardwareId);
+
+            var hashedString = CryptographicBuffer.EncodeToHexString(hashed);
+            return hashedString;
+        }
+
         private MainViewModel ViewModel => DataContext as MainViewModel;
 
         private void ClearFields()
         {
             NewTitle.Text = "";
             NewValue.Text = "";
-            NewOwnerId.Text = "";
         }
 
         private Task ComposeTask()
@@ -38,7 +53,7 @@ namespace WpApiClient
             {
                 Title = NewTitle.Text,
                 Value = NewValue.Text,
-                OwnerId = NewOwnerId.Text
+                OwnerId = GetDeviceId()
             };
         }
 

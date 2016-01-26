@@ -20,8 +20,6 @@
             <TextBox x:Name="Title"/>
             <TextBlock FontSize="25">Value</TextBlock>
             <TextBox x:Name="Value"/>
-            <TextBlock FontSize="25">Owner ID</TextBlock>
-            <TextBox x:Name="OwnerId"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Click="OnUpdateTaskClick" Content="Update"/>

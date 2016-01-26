@@ -35,8 +35,6 @@
             <TextBox x:Name="NewTitle"/>
             <TextBlock FontSize="25">Value</TextBlock>
             <TextBox x:Name="NewValue"/>
-            <TextBlock FontSize="25">Owner ID</TextBlock>
-            <TextBox x:Name="NewOwnerId"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Click="OnAddTaskClick">Add new task</Button>

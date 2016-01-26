@@ -24,6 +24,7 @@ namespace WpApiClient.Services
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue(Json));
         }
+
         public bool SendTask(string json)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, _httpUri)
@@ -50,6 +51,18 @@ namespace WpApiClient.Services
                 result.Error = JsonConvert.DeserializeObject<Error>(response);
             }
             return result;
+        }
+        public bool UpdateTask(int taskId, string json)
+        {
+            var content = new StringContent(
+                    json,
+                    Encoding.UTF8,
+                    "application/json"
+                );
+
+            var address = new Uri(_httpUri + "/" + taskId);
+
+            return _client.PutAsync(address, content).ContinueWith(task => task.Result.EnsureSuccessStatusCode()).Result.IsSuccessStatusCode;
         }
 
         public bool RemoveTask(int taskId)
