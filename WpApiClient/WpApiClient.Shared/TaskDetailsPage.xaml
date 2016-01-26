@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="WpApiClient.TaskDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WpApiClient"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" FontSize="100" >Task</TextBlock>
+        <StackPanel Grid.Row="1" Margin="0,44,0,79" Grid.RowSpan="2">
+            <TextBlock FontSize="25">Title</TextBlock>
+            <TextBox x:Name="NewTitle"/>
+            <TextBlock FontSize="25">Value</TextBlock>
+            <TextBox x:Name="NewValue"/>
+            <TextBlock FontSize="25">Owner ID</TextBlock>
+            <TextBox x:Name="NewOwnerId"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Click="OnUpdateTaskClick" Content="Update"/>
+            <Button Click="OnDeleteClick" Content="Delete"/>
+            <Button Click="OnCancelClick" Content="Cancel"/>
+        </StackPanel>
+    </Grid>
+</Page>

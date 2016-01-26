@@ -20,10 +20,17 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Task.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HttpApiClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TaskDetailsPage.xaml.cs">
+      <DependentUpon>TaskDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)TaskDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

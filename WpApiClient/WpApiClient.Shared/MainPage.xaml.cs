@@ -12,11 +12,11 @@ namespace WpApiClient
 {
     public sealed partial class MainPage : Page
     {
-        readonly HttpApiClient _client = new HttpApiClient(
+        public static readonly HttpApiClient _client = new HttpApiClient(
             new Uri("http://windowsphoneuam.azurewebsites.net/api/todotasks")
         );
 
-        public ObservableCollection<Task> TasksList = new ObservableCollection<Task>();
+        public static ObservableCollection<Task> TasksList = new ObservableCollection<Task>();
 
         public MainPage()
         {
@@ -79,11 +79,12 @@ namespace WpApiClient
             PullTasks();
         }
 
-        private void OnTaskClick(object sender, SelectionChangedEventArgs e)
+        private void OnTaskClick(object sender, RoutedEventArgs e)
         {
             var task = TasksListView.SelectedItem as Task;
             if (task == null) return;
-            RemoveTask(task);
+            //RemoveTask(task);
+            Frame.Navigate(typeof(TaskDetailsPage), task);
         }
     }
 }
