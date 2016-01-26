@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using WpApiClient.ViewModels;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -28,6 +29,7 @@ namespace WpApiClient
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
+        public static ViewModelLocator ViewModelLocator = new ViewModelLocator();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
