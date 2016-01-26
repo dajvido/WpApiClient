@@ -29,7 +29,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" FontSize="30">Add Task</TextBlock>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock FontSize="30" Width="278">
+        		<Run Text="Add Task"/>
+            </TextBlock>
+            <Button Click="OnAboutClick" Content="About" Margin="0,0,0,2.167"/>
+        </StackPanel>
         <StackPanel Grid.Row="1">
             <TextBlock FontSize="25">Title</TextBlock>
             <TextBox x:Name="NewTitle"/>

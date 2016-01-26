@@ -82,5 +82,10 @@ namespace WpApiClient
             if (task == null) return;
             Frame.Navigate(typeof(TaskDetailsPage), task);
         }
+
+        private void OnAboutClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage));
+        }
     }
 }
