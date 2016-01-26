@@ -47,7 +47,7 @@ namespace WpApiClient
         {
             task.Title = Title.Text;
             task.Value = Value.Text;
-            ViewModel.UpdateTask(task);
+            ViewModel.UpdateTask(task, MainPage.DeviceId);
             Frame.Navigate(typeof(MainPage));
         }
 

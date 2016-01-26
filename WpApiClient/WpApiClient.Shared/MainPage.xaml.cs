@@ -18,16 +18,18 @@ namespace WpApiClient
 {
     public sealed partial class MainPage : Page
     {
+        public static string DeviceId;
         public MainPage()
         {
             this.InitializeComponent();
 
             DataContext = App.ViewModelLocator.MainViewModel;
+            DeviceId = GetDeviceId();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}
 
-        private static string GetDeviceId()
+        public static string GetDeviceId()
         {
             var token = HardwareIdentification.GetPackageSpecificToken(null);
             var hasher = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
@@ -53,7 +55,7 @@ namespace WpApiClient
             {
                 Title = NewTitle.Text,
                 Value = NewValue.Text,
-                OwnerId = GetDeviceId()
+                OwnerId = DeviceId
             };
         }
 
@@ -71,7 +73,7 @@ namespace WpApiClient
 
         private void OnRefreshClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.GetTasks();
+            ViewModel.GetTasks(DeviceId);
         }
 
         private void OnTaskClick(object sender, RoutedEventArgs e)

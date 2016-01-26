@@ -35,17 +35,17 @@ namespace WpApiClient.ViewModels
         public async void Add(Task task)
         {
             var result = _client.SendTask(JsonConvert.SerializeObject(task));
-            if (result) { 
-                TasksList.Add(task);
+            if (result) {
+                GetTasks(task.OwnerId);
             } else
             {
                 await new MessageDialog("There was a problem adding new task. Please try later.", "Sync error").ShowAsync();
             }
         }
 
-        public async void GetTasks()
+        public async void GetTasks(string ownerId = "")
         {
-            var response = await _client.GetTasks();
+            var response = await _client.GetTasks(ownerId);
             if (response.Result != null)
                 TasksList = response.Result.ToObservableCollection();
             else
@@ -54,12 +54,12 @@ namespace WpApiClient.ViewModels
             }
         }
 
-        public async void UpdateTask(Task task)
+        public async void UpdateTask(Task task, string ownerId = "")
         {
             var result = _client.UpdateTask(task.Id, JsonConvert.SerializeObject(task));
             if (result)
             {
-                GetTasks();
+                GetTasks(ownerId);
             }
             else
             {

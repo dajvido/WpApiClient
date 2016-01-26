@@ -37,10 +37,11 @@ namespace WpApiClient.Services
             return response.Result.IsSuccessStatusCode;
         }
 
-        public async Task<ApiResponse<List<Models.Task>>> GetTasks()
+        public async Task<ApiResponse<List<Models.Task>>> GetTasks(string ownerId = "")
         {
+            var address = ownerId != "" ? new Uri(_httpUri + "?OwnerId=" + ownerId) : _httpUri;
             var result = new ApiResponse<List<Models.Task>>();
-            var request = await _client.GetAsync(_httpUri);
+            var request = await _client.GetAsync(address);
             var response = await request.Content.ReadAsStringAsync();
             if (request.IsSuccessStatusCode)
             {

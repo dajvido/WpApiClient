@@ -1,4 +1,7 @@
-﻿namespace WpApiClient.Models
+﻿using System;
+using System.Globalization;
+
+namespace WpApiClient.Models
 {
     public class Task
     {
@@ -6,6 +9,23 @@
         public string Title { get; set; }
         public string Value { get; set; }
         public string OwnerId { get; set; }
-        public string CreatedAt { get; set; }
+        private string _createdAt;
+        public string CreatedAt
+        {
+            get { return _createdAt; }
+            set
+            {
+                try
+                {
+                    _createdAt =
+                        DateTime.ParseExact(value, "d/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                            .ToString("dd-MM-yyyy HH:mm:ss");
+                }
+                catch (FormatException)
+                {
+                    _createdAt = value;
+                }
+            }
+        }
     }
 }
