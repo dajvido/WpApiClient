@@ -17,7 +17,6 @@ namespace WpApiClient
         public MainPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
 
             DataContext = App.ViewModelLocator.MainViewModel;
         }
@@ -70,9 +69,7 @@ namespace WpApiClient
         {
             var task = TasksListView.SelectedItem as Task;
             if (task == null) return;
-            //ViewModel.RemoveTask(task);
             Frame.Navigate(typeof(TaskDetailsPage), task);
-
         }
     }
 }

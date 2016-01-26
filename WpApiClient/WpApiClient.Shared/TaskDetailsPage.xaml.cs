@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WpApiClient.Models;
+using WpApiClient.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,6 +34,16 @@ namespace WpApiClient
         public TaskDetailsPage()
         {
             this.InitializeComponent();
+
+            DataContext = App.ViewModelLocator.MainViewModel;
+        }
+
+        private MainViewModel ViewModel
+        {
+            get
+            {
+                return DataContext as MainViewModel;
+            }
         }
 
         private void OnUpdateTaskClick(object sender, RoutedEventArgs e)
@@ -42,14 +53,13 @@ namespace WpApiClient
 
         private void OnDeleteClick(object sender, RoutedEventArgs e)
         {
-            MainPage._client.RemoveTask(task.Id);
-            MainPage.TasksList.Remove(task);
+            ViewModel.RemoveTask(task);
             Frame.Navigate(typeof(MainPage));
         }
 
         private void OnCancelClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(MainPage));
+            if (Frame.CanGoBack) Frame.GoBack();
         }
     }
 }
