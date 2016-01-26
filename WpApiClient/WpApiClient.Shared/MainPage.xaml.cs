@@ -23,13 +23,7 @@ namespace WpApiClient
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}
 
-        private MainViewModel ViewModel
-        {
-            get
-            {
-                return DataContext as MainViewModel;
-            }
-        }
+        private MainViewModel ViewModel => DataContext as MainViewModel;
 
         private void ClearFields()
         {

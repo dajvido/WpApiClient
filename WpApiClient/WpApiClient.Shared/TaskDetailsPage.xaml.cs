@@ -29,6 +29,10 @@ namespace WpApiClient
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             task = e.Parameter as Task;
+            if (task == null) return;
+            Title.Text = task.Title;
+            Value.Text = task.Value;
+            OwnerId.Text = task.OwnerId;
         }
 
         public TaskDetailsPage()
@@ -38,13 +42,7 @@ namespace WpApiClient
             DataContext = App.ViewModelLocator.MainViewModel;
         }
 
-        private MainViewModel ViewModel
-        {
-            get
-            {
-                return DataContext as MainViewModel;
-            }
-        }
+        private MainViewModel ViewModel => DataContext as MainViewModel;
 
         private void OnUpdateTaskClick(object sender, RoutedEventArgs e)
         {

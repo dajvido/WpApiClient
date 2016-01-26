@@ -31,9 +31,12 @@
 
         <TextBlock Grid.Row="0" FontSize="30">Add Task</TextBlock>
         <StackPanel Grid.Row="1">
-            <TextBox x:Name="NewTitle"></TextBox>
-            <TextBox x:Name="NewValue"></TextBox>
-            <TextBox x:Name="NewOwnerId"></TextBox>
+            <TextBlock FontSize="25">Title</TextBlock>
+            <TextBox x:Name="NewTitle"/>
+            <TextBlock FontSize="25">Value</TextBlock>
+            <TextBox x:Name="NewValue"/>
+            <TextBlock FontSize="25">Owner ID</TextBlock>
+            <TextBox x:Name="NewOwnerId"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Click="OnAddTaskClick">Add new task</Button>

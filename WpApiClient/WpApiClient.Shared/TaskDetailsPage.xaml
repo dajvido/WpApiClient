@@ -17,11 +17,11 @@
         <TextBlock Grid.Row="0" FontSize="100" >Task</TextBlock>
         <StackPanel Grid.Row="1" Margin="0,44,0,79" Grid.RowSpan="2">
             <TextBlock FontSize="25">Title</TextBlock>
-            <TextBox x:Name="NewTitle"/>
+            <TextBox x:Name="Title"/>
             <TextBlock FontSize="25">Value</TextBlock>
-            <TextBox x:Name="NewValue"/>
+            <TextBox x:Name="Value"/>
             <TextBlock FontSize="25">Owner ID</TextBlock>
-            <TextBox x:Name="NewOwnerId"/>
+            <TextBox x:Name="OwnerId"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Click="OnUpdateTaskClick" Content="Update"/>
