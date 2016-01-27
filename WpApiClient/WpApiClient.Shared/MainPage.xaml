@@ -10,7 +10,7 @@
 
     <Page.Resources>
         <DataTemplate x:Key="TasksListViewTemplate" >
-            <StackPanel>
+            <StackPanel PointerMoved="OnTaskMoved">
                 <TextBlock Text="{Binding Id}"></TextBlock>
                 <TextBlock Text="{Binding Title}"></TextBlock>
                 <TextBlock Text="{Binding Value}"></TextBlock>
