@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using WpApiClient.Models;
 using WpApiClient.Services;
@@ -37,7 +38,8 @@ namespace WpApiClient.ViewModels
             var result = _client.SendTask(JsonConvert.SerializeObject(task));
             if (result) {
                 GetTasks(task.OwnerId);
-            } else
+            }
+            else
             {
                 await new MessageDialog("There was a problem adding new task. Please try later.", "Sync error").ShowAsync();
             }
@@ -47,10 +49,14 @@ namespace WpApiClient.ViewModels
         {
             var response = await _client.GetTasks(ownerId);
             if (response.Result != null)
+            {
                 TasksList = response.Result.ToObservableCollection();
+                MainPage.SaveData(TasksList);
+            }
             else
             {
-                await new MessageDialog("There was a problem getting tasks. Please try later.", "Sync error").ShowAsync();
+                await
+                    new MessageDialog("There was a problem getting tasks. Please try later.", "Sync error").ShowAsync();
             }
         }
 
@@ -73,7 +79,9 @@ namespace WpApiClient.ViewModels
             if (result)
             {
                 TasksList.Remove(task);
-            } else
+                MainPage.SaveData(TasksList);
+            }
+            else
             {
                 await new MessageDialog("There was a problem removing task. Please try later.", "Sync error").ShowAsync();
             }

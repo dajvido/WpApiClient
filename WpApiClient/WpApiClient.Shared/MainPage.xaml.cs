@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
+using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
@@ -19,16 +21,38 @@ namespace WpApiClient
     public sealed partial class MainPage : Page
     {
         public static string DeviceId;
+        private const string StorageKey = "TaskListData";
+
         public MainPage()
         {
             this.InitializeComponent();
 
             DataContext = App.ViewModelLocator.MainViewModel;
             DeviceId = GetDeviceId();
+            LoadData();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {}
 
+        List<string> _taskListData = new List<string>();
+        readonly ObservableCollection<Task> _taskListLoaded = new ObservableCollection<Task>();
+
+        public static void SaveData(ObservableCollection<Task> taskList)
+        {
+            ApplicationData.Current.LocalSettings.Values[StorageKey] = taskList.Select(JsonConvert.SerializeObject).ToArray();
+        }
+
+        private void LoadData()
+        {
+            var storage = ApplicationData.Current.LocalSettings.Values[StorageKey];
+            if (storage == null) return;
+            _taskListData = ((string[]) storage).ToList();
+            foreach (var task in _taskListData)
+            {
+                _taskListLoaded.Add(JsonConvert.DeserializeObject<Task>(task));
+            }
+            ViewModel.TasksList = _taskListLoaded;
+        }
         public static string GetDeviceId()
         {
             var token = HardwareIdentification.GetPackageSpecificToken(null);
