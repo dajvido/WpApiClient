@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WpApiClient.ViewModels
+﻿namespace WpApiClient.ViewModels
 {
     public class ViewModelLocator
     {

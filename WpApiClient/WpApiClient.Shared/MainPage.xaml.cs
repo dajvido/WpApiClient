@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Windows.Foundation;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,9 +11,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 using WpApiClient.Models;
-using WpApiClient.Services;
 using WpApiClient.ViewModels;
-using WpApiClient.Extensions;
 
 namespace WpApiClient
 {
@@ -24,7 +19,7 @@ namespace WpApiClient
     {
         public static string DeviceId;
         private const string StorageKey = "TaskListData";
-        private int _startPosition, _endPosition;
+        private int _startPosition;
         private Task _taskSwipe;
 
         public MainPage()
@@ -42,8 +37,8 @@ namespace WpApiClient
             };
             TasksListView.ManipulationCompleted += (s, e) =>
             {
-                _endPosition = (int)e.Position.X;
-                if (_startPosition > _endPosition || _startPosition < _endPosition)
+                var endPosition = (int)e.Position.X;
+                if (_startPosition > endPosition || _startPosition < endPosition)
                 {
                     if (_taskSwipe != null) ViewModel.RemoveTask(_taskSwipe);
                 };

@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using WpApiClient.Models;
 using WpApiClient.Services;
 using WpApiClient.Extensions;
@@ -22,13 +19,13 @@ namespace WpApiClient.ViewModels
             new Uri("http://windowsphoneuam.azurewebsites.net/api/todotasks")
         );
 
-        private ObservableCollection<Task> tasksList;
+        private ObservableCollection<Task> _tasksList;
         public ObservableCollection<Task> TasksList
         {
-            get { return tasksList; }
+            get { return _tasksList; }
             set
             {
-                tasksList = value;
+                _tasksList = value;
                 NotifyPropertyChanged();
             }
         }
